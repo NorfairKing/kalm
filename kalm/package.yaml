@@ -6,6 +6,17 @@ dependencies:
 
 library:
   source-dirs: src
+  dependencies:
+    - HaskellNet
+    - HaskellNet-SSL
+    - attoparsec
+    - bytestring
+    - lens
+    - persistent
+    - persistent-sqlite
+    - persistent-template
+    - purebred-email
+    - text
 
 executables:
   kalm:

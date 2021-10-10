@@ -1,3 +1,11 @@
 resolver: lts-16.12
 packages:
 - kalm
+extra-deps:
+- HaskellNet-0.6@sha256:1b514b95acf1c56f39bebc27150c909988d0a6ad28a2db1210316cffed57cad7,2344
+- HaskellNet-SSL-0.3.4.4@sha256:6a1a3c6d3804e857d183e702214476a383628eac83eb4bcbc7d5c4b8a2e05bf3,1704
+- purebred-email-0.4.3@sha256:b88b6bf62d9f44e2008cafaea44f4faf7ce4cefcbff66776b81e1aa77143f1c2,3098
+
+
+nix:
+  shell-file: shell.nix
