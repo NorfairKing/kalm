@@ -14,6 +14,7 @@ library:
     - envparse
     - lens
     - monad-logger
+    - mtl
     - optparse-applicative
     - path
     - path-io
@@ -22,6 +23,7 @@ library:
     - persistent-template
     - purebred-email
     - text
+    - unliftio
     - yaml
     - yamlparse-applicative
 

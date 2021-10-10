@@ -12,7 +12,9 @@ library
   exposed-modules:
       Kalm
       Kalm.DB
+      Kalm.Env
       Kalm.OptParse
+      Kalm.Sync
   other-modules:
       Paths_kalm
   hs-source-dirs:
@@ -26,6 +28,7 @@ library
     , envparse
     , lens
     , monad-logger
+    , mtl
     , optparse-applicative
     , path
     , path-io
@@ -34,6 +37,7 @@ library
     , persistent-template
     , purebred-email
     , text
+    , unliftio
     , yaml
     , yamlparse-applicative
   default-language: Haskell2010
