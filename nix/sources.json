@@ -1,4 +1,16 @@
 {
+    "gitignore": {
+        "branch": "master",
+        "description": "Nix functions for filtering local git sources",
+        "homepage": "",
+        "owner": "hercules-ci",
+        "repo": "gitignore.nix",
+        "rev": "80463148cd97eebacf80ba68cf0043598f0d7438",
+        "sha256": "1l34rmh4lf4w8a1r8vsvkmg32l1chl0p593fl12r28xx83vn150v",
+        "type": "tarball",
+        "url": "https://github.com/hercules-ci/gitignore.nix/archive/80463148cd97eebacf80ba68cf0043598f0d7438.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "niv": {
         "branch": "master",
         "description": "Easy dependency management for Nix projects",
@@ -21,6 +33,54 @@
         "sha256": "1jy36v8af78qlml78v21djla9ywdq1rcvb25axk020xmgsxxz916",
         "type": "tarball",
         "url": "https://github.com/NixOS/nixpkgs/archive/a13824fe5e38187fbc75cd598b5c06bdcc13501f.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "safe-coloured-text": {
+        "branch": "master",
+        "description": null,
+        "homepage": "https://cs-syd.eu/posts/2021-03-07-safe-coloured-text",
+        "owner": "NorfairKing",
+        "repo": "safe-coloured-text",
+        "rev": "7f157485e55528648a95edf3508a122b2e55779e",
+        "sha256": "0ayxfay78s4rlir3ls76bb5kw2fxwnj1kak9lwd86zvdqjwl02l5",
+        "type": "tarball",
+        "url": "https://github.com/NorfairKing/safe-coloured-text/archive/7f157485e55528648a95edf3508a122b2e55779e.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "sydtest": {
+        "branch": "master",
+        "description": "A modern testing framework for Haskell with good defaults and advanced testing features.",
+        "homepage": "",
+        "owner": "NorfairKing",
+        "repo": "sydtest",
+        "rev": "137b488de70b022c0e08409b174285ef07cdc4fc",
+        "sha256": "1jdajxbdynbvqf9lljg7anqam2rx4gqm9yn062dmp3pk57dj9ixb",
+        "type": "tarball",
+        "url": "https://github.com/NorfairKing/sydtest/archive/137b488de70b022c0e08409b174285ef07cdc4fc.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "validity": {
+        "branch": "master",
+        "description": "Validity and validity-based testing",
+        "homepage": "https://www.youtube.com/watch?v=eIs9qNh17SM",
+        "owner": "NorfairKing",
+        "repo": "validity",
+        "rev": "f5e5d69b3502cdd9243b412c31ba9619b9e89462",
+        "sha256": "1ak07mxyv43c5a988s47b8h4jhqzp3lsmnlhjj3jdi0fil4jdjz2",
+        "type": "tarball",
+        "url": "https://github.com/NorfairKing/validity/archive/f5e5d69b3502cdd9243b412c31ba9619b9e89462.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "yamlparse-applicative": {
+        "branch": "master",
+        "description": "An optparse-applicative -style explainable yaml parser",
+        "homepage": "https://cs-syd.eu/posts/2020-06-28-yamlparse-applicative",
+        "owner": "NorfairKing",
+        "repo": "yamlparse-applicative",
+        "rev": "224a03aa8880d426b7641db16a05e0c7b311684f",
+        "sha256": "1a0jb1lrrawwc7x87i2hj99zbpyl70y90zjpkr2s0s04nnsxjk4f",
+        "type": "tarball",
+        "url": "https://github.com/NorfairKing/yamlparse-applicative/archive/224a03aa8880d426b7641db16a05e0c7b311684f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }

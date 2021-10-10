@@ -6,6 +6,7 @@ pkgs.haskell.lib.buildStackProject {
   name = "kalm-shell";
   buildInputs = with pkgs; [
     (import sources.niv { }).niv
+    haskellPackages.sydtest-discover
     zlib
   ];
 }

@@ -15,6 +15,7 @@ extra-deps:
   commit: 7f157485e55528648a95edf3508a122b2e55779e
   subdirs:
     - safe-coloured-text
+    - safe-coloured-text-terminfo
 - github: NorfairKing/sydtest
   commit: bdb1ae467e0fc49dbcbde744a432616efb236e31
   subdirs:
