@@ -5,7 +5,21 @@ extra-deps:
 - HaskellNet-0.6@sha256:1b514b95acf1c56f39bebc27150c909988d0a6ad28a2db1210316cffed57cad7,2344
 - HaskellNet-SSL-0.3.4.4@sha256:6a1a3c6d3804e857d183e702214476a383628eac83eb4bcbc7d5c4b8a2e05bf3,1704
 - purebred-email-0.4.3@sha256:b88b6bf62d9f44e2008cafaea44f4faf7ce4cefcbff66776b81e1aa77143f1c2,3098
+- envparse-0.4.1@sha256:989902e6368532548f61de1fa245ad2b39176cddd8743b20071af519a709ce30,2842
 
+- github: NorfairKing/yamlparse-applicative
+  commit: 224a03aa8880d426b7641db16a05e0c7b311684f
+  subdirs:
+    - yamlparse-applicative
+- github: NorfairKing/safe-coloured-text
+  commit: 7f157485e55528648a95edf3508a122b2e55779e
+  subdirs:
+    - safe-coloured-text
+- github: NorfairKing/sydtest
+  commit: bdb1ae467e0fc49dbcbde744a432616efb236e31
+  subdirs:
+    - sydtest
+    - sydtest-discover
 
 nix:
   shell-file: shell.nix

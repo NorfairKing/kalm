@@ -11,13 +11,19 @@ library:
     - HaskellNet-SSL
     - attoparsec
     - bytestring
+    - envparse
     - lens
     - monad-logger
+    - optparse-applicative
+    - path
+    - path-io
     - persistent
     - persistent-sqlite
     - persistent-template
     - purebred-email
     - text
+    - yaml
+    - yamlparse-applicative
 
 executables:
   kalm:
