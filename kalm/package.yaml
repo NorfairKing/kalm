@@ -12,6 +12,7 @@ library:
     - attoparsec
     - bytestring
     - lens
+    - monad-logger
     - persistent
     - persistent-sqlite
     - persistent-template

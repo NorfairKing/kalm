@@ -14,6 +14,7 @@ module Kalm.DB where
 import Data.ByteString (ByteString)
 import Data.Text (Text)
 import qualified Data.Text as T
+import Data.Word
 import Database.Persist
 import Database.Persist.Sql
 import Database.Persist.TH
@@ -25,7 +26,8 @@ share
   [persistLowerCase|
 
 Email
-  body ByteString
+  mailboxName String
+  contents ByteString
 
   deriving Show
   deriving Eq
