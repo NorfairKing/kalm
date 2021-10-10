@@ -1,0 +1,20 @@
+digraph world {
+
+  imap_server [label="IMAP Server"];
+
+  subgraph cluster_kalm {
+    label = "Kalm";
+  
+
+    storage [label="email storage"];
+    queue [label="Send queue"];
+
+    storage -> storage [label="Read, Organise"];
+    storage -> queue [label="Reply"];
+
+  }
+  imap_server -> storage  [label="Periodic Synchronisation", dir=both];
+  queue -> smtp_server  [label="Scheduled Sending"];
+
+  smtp_server [label="SMTP Server"];
+}
