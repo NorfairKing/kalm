@@ -9,8 +9,10 @@ data Env = Env {envConnectionPool :: DB.ConnectionPool}
 
 type KalmM a = ReaderT Env (LoggingT IO) a
 
-runKalmM :: Env -> KalmM a -> LoggingT IO a
-runKalmM = flip runReaderT
+runKalmM :: MonadLoggerIO m => Env -> KalmM a -> m a
+runKalmM env func = do
+  logFunc <- askLoggerIO
+  liftIO $ runLoggingT (runReaderT func env) logFunc
 
 runDB :: SqlPersistT (LoggingT IO) a -> KalmM a
 runDB query = do

@@ -13,6 +13,7 @@ import qualified Data.Text as T
 import Data.Yaml
 import qualified Env
 import GHC.Generics (Generic)
+import Network.Socket
 import Options.Applicative as OptParse
 import qualified Options.Applicative.Help as OptParse (string)
 import Path
@@ -44,6 +45,7 @@ data SyncSettings = SyncSettings
 
 data SyncServerSettings = SyncServerSettings
   { syncServerSettingHost :: !String,
+    syncServerSettingPort :: !PortNumber,
     syncServerSettingUsername :: !String,
     syncServerSettingPassword :: !String
   }
@@ -59,6 +61,7 @@ combineToInstructions (Arguments cmd Flags {..}) Environment {..} mConf = do
               maybeToList $
                 SyncServerSettings
                   <$> syncArgHost
+                  <*> pure 993
                   <*> syncArgUsername
                   <*> syncArgPassword
         pure $ DispatchSync SyncSettings {..}

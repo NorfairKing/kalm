@@ -21,6 +21,10 @@ extra-deps:
   subdirs:
     - sydtest
     - sydtest-discover
+    - sydtest-persistent
+    - sydtest-persistent-sqlite
+    - sydtest-process
+    - sydtest-typed-process
 
 nix:
   shell-file: shell.nix

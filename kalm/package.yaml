@@ -15,6 +15,7 @@ library:
     - lens
     - monad-logger
     - mtl
+    - network
     - optparse-applicative
     - path
     - path-io
@@ -48,5 +49,18 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    - bytestring
     - kalm
+    - monad-logger
+    - network
+    - path
+    - path-io
+    - port-utils
+    - process
     - sydtest
+    - sydtest-persistent
+    - sydtest-persistent-sqlite
+    - sydtest-process
+    - sydtest-typed-process
+    - text
+    - typed-process

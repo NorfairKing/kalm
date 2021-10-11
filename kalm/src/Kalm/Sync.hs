@@ -10,6 +10,7 @@ import Control.Monad.Logger
 import Data.Attoparsec.ByteString (takeByteString)
 import Data.MIME as MIME
 import Data.RFC5322 as RFC5322
+import qualified Data.Text as T
 import Database.Persist
 import Database.Persist as DB
 import Database.Persist.Sqlite
@@ -24,7 +25,15 @@ import UnliftIO
 kalmSync :: SyncSettings -> KalmM ()
 kalmSync SyncSettings {..} =
   forM_ syncSettingServers $ \SyncServerSettings {..} -> do
-    imapConnection <- liftIO $ IMAP.connectIMAPSSL syncServerSettingHost
+    imapConnection <-
+      liftIO $
+        IMAP.connectIMAPPort syncServerSettingHost syncServerSettingPort
+    -- IMAP.connectIMAPSSLWithSettings
+    --   syncServerSettingHost
+    --   ( IMAP.defaultSettingsIMAPSSL {IMAP.sslPort = syncServerSettingPort}
+    --   )
+
+    logDebugN $ T.pack $ "Connected to " <> syncServerSettingHost
 
     capabilities <- liftIO $ IMAP.capability imapConnection
     liftIO $ print capabilities
