@@ -76,8 +76,10 @@ test-suite kalm-test
   build-depends:
       HaskellNet
     , HaskellNet-SSL
+    , QuickCheck
     , base >=4.7 && <5
     , bytestring
+    , case-insensitive
     , genvalidity
     , genvalidity-bytestring
     , genvalidity-sydtest
@@ -90,6 +92,7 @@ test-suite kalm-test
     , persistent
     , port-utils
     , process
+    , purebred-email
     , sydtest
     , sydtest-persistent
     , sydtest-persistent-sqlite

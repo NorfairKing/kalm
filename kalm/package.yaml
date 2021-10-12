@@ -55,7 +55,9 @@ tests:
     dependencies:
     - HaskellNet
     - HaskellNet-SSL
+    - QuickCheck
     - bytestring
+    - case-insensitive
     - genvalidity
     - genvalidity-bytestring
     - genvalidity-sydtest
@@ -68,6 +70,7 @@ tests:
     - persistent
     - port-utils
     - process
+    - purebred-email
     - sydtest
     - sydtest-persistent
     - sydtest-persistent-sqlite
