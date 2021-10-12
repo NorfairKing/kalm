@@ -31,7 +31,8 @@ spec = do
                 { syncServerSettingHost = "127.0.0.1",
                   syncServerSettingPort = 143,
                   syncServerSettingUsername = "syd",
-                  syncServerSettingPassword = "secret"
+                  syncServerSettingPassword = "secret",
+                  syncServerSettingSSL = False
                 }
             ]
       let syncSets = SyncSettings {..}

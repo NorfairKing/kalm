@@ -47,7 +47,8 @@ data SyncServerSettings = SyncServerSettings
   { syncServerSettingHost :: !String,
     syncServerSettingPort :: !PortNumber,
     syncServerSettingUsername :: !String,
-    syncServerSettingPassword :: !String
+    syncServerSettingPassword :: !String,
+    syncServerSettingSSL :: !Bool
   }
   deriving (Show, Eq, Generic)
 
@@ -56,14 +57,16 @@ combineToInstructions (Arguments cmd Flags {..}) Environment {..} mConf = do
   disp <-
     -- Resolve the command-specific settings for each command
     case cmd of
-      CommandSync SyncArgs {..} -> do
-        let syncSettingServers =
-              maybeToList $
-                SyncServerSettings
-                  <$> syncArgHost
-                  <*> pure 993
-                  <*> syncArgUsername
-                  <*> syncArgPassword
+      CommandSync SyncArgs -> do
+        let combineToSyncServerSettings :: SyncServerConfiguration -> SyncServerSettings
+            combineToSyncServerSettings SyncServerConfiguration {..} =
+              let syncServerSettingHost = syncServerConfHost
+                  syncServerSettingSSL = fromMaybe True syncServerConfSSL
+                  syncServerSettingPort = fromMaybe (if syncServerSettingSSL then 993 else 143) syncServerConfPort
+                  syncServerSettingUsername = syncServerConfUsername
+                  syncServerSettingPassword = syncServerConfPassword
+               in SyncServerSettings {..}
+        let syncSettingServers = map combineToSyncServerSettings $ fromMaybe [] $ syncConfServers <$> mc confSyncConfiguration
         pure $ DispatchSync SyncSettings {..}
   pure $ Instructions disp Settings
   where
@@ -71,13 +74,57 @@ combineToInstructions (Arguments cmd Flags {..}) Environment {..} mConf = do
     mc f = mConf >>= f
 
 data Configuration = Configuration
+  { confSyncConfiguration :: !(Maybe SyncConfiguration)
+  }
   deriving (Show, Eq, Generic)
 
 instance FromJSON Configuration where
   parseJSON = viaYamlSchema
 
 instance YamlSchema Configuration where
-  yamlSchema = pure Configuration
+  yamlSchema =
+    objectParser "Configuration" $
+      Configuration
+        <$> optionalField "sync" "Synchronisation configuration"
+
+data SyncConfiguration = SyncConfiguration
+  { syncConfServers :: ![SyncServerConfiguration]
+  }
+  deriving (Show, Eq, Generic)
+
+instance FromJSON SyncConfiguration where
+  parseJSON = viaYamlSchema
+
+instance YamlSchema SyncConfiguration where
+  yamlSchema =
+    objectParser "SyncConfiguration" $
+      SyncConfiguration
+        <$> optionalFieldWithDefault "servers" [] "The IMAP servers to sync with"
+
+data SyncServerConfiguration = SyncServerConfiguration
+  { syncServerConfHost :: !String,
+    syncServerConfPort :: !(Maybe PortNumber),
+    syncServerConfUsername :: !String,
+    syncServerConfPassword :: !String,
+    syncServerConfSSL :: !(Maybe Bool)
+  }
+  deriving (Show, Eq, Generic)
+
+instance FromJSON SyncServerConfiguration where
+  parseJSON = viaYamlSchema
+
+instance YamlSchema SyncServerConfiguration where
+  yamlSchema =
+    objectParser "SyncServerConfiguration" $
+      SyncServerConfiguration
+        <$> requiredField "host" "The IMAP server host; example: imap.fastmail.com"
+        <*> optionalField "port" "The port to connect on"
+        <*> requiredField "username" "The username of the user to authenticate as"
+        <*> requiredField "password" "The password of the user to authenticate as"
+        <*> optionalField "ssl" "Connect using ssl"
+
+instance YamlSchema PortNumber where
+  yamlSchema = (fromIntegral :: Int -> PortNumber) <$> yamlSchema
 
 getConfiguration :: Flags -> Environment -> IO (Maybe Configuration)
 getConfiguration Flags {..} Environment {..} =
@@ -89,7 +136,7 @@ getConfiguration Flags {..} Environment {..} =
 
 defaultConfigFile :: IO (Path Abs File)
 defaultConfigFile = do
-  xdgConfigDir <- getXdgDir XdgConfig (Just [reldir|optparse-template|])
+  xdgConfigDir <- getXdgDir XdgConfig (Just [reldir|kalm|])
   resolveFile xdgConfigDir "config.yaml"
 
 data Environment = Environment
@@ -149,46 +196,13 @@ parseCommand =
       ]
 
 data SyncArgs = SyncArgs
-  { syncArgHost :: !(Maybe String),
-    syncArgUsername :: !(Maybe String),
-    syncArgPassword :: !(Maybe String)
-  }
   deriving (Show, Eq, Generic)
 
 parseCommandSync :: OptParse.ParserInfo SyncArgs
 parseCommandSync = OptParse.info parser modifier
   where
     modifier = OptParse.fullDesc <> OptParse.progDesc "Do an IMAP sync"
-    parser =
-      ( SyncArgs
-          <$> optional
-            ( strOption
-                ( mconcat
-                    [ long "host",
-                      help "The hostname of the IMAP server",
-                      metavar "HOSTNAME"
-                    ]
-                )
-            )
-          <*> optional
-            ( strOption
-                ( mconcat
-                    [ long "username",
-                      help "The username of the user to authenticate at the IMAP server",
-                      metavar "USERNAME"
-                    ]
-                )
-            )
-          <*> optional
-            ( strOption
-                ( mconcat
-                    [ long "password",
-                      help "The password of the user to authenticate at the IMAP server",
-                      metavar "PASSWORD"
-                    ]
-                )
-            )
-      )
+    parser = pure SyncArgs
 
 data Flags = Flags
   { flagConfigFile :: !(Maybe FilePath)

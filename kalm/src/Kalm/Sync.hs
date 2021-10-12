@@ -27,11 +27,11 @@ kalmSync SyncSettings {..} =
   forM_ syncSettingServers $ \SyncServerSettings {..} -> do
     imapConnection <-
       liftIO $
-        IMAP.connectIMAPPort syncServerSettingHost syncServerSettingPort
-    -- IMAP.connectIMAPSSLWithSettings
-    --   syncServerSettingHost
-    --   ( IMAP.defaultSettingsIMAPSSL {IMAP.sslPort = syncServerSettingPort}
-    --   )
+        if syncServerSettingSSL
+          then
+            let imapSettings = IMAP.defaultSettingsIMAPSSL {IMAP.sslPort = syncServerSettingPort}
+             in IMAP.connectIMAPSSLWithSettings syncServerSettingHost imapSettings
+          else IMAP.connectIMAPPort syncServerSettingHost syncServerSettingPort
 
     logDebugN $ T.pack $ "Connected to " <> syncServerSettingHost
 
