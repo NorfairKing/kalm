@@ -11,6 +11,7 @@ library:
     - HaskellNet-SSL
     - attoparsec
     - bytestring
+    - case-insensitive
     - envparse
     - lens
     - monad-logger

@@ -11,6 +11,7 @@ import Data.Attoparsec.ByteString (takeByteString)
 import Data.MIME as MIME
 import Data.RFC5322 as RFC5322
 import qualified Data.Text as T
+import qualified Data.Text.Encoding as TE
 import Database.Persist
 import Database.Persist as DB
 import Database.Persist.Sqlite
@@ -62,10 +63,13 @@ kalmSync SyncSettings {..} =
             size <- liftIO $ IMAP.fetchSize imapConnection uid
             liftIO $ print size
             contents <- liftIO $ IMAP.fetch imapConnection uid
-            runDB $
-              DB.insert_
-                ( Email
-                    { emailMailbox = T.pack mailboxName,
-                      emailContents = contents
-                    }
-                )
+            case parse (message mime) contents of
+              Left err -> liftIO $ die err
+              Right message ->
+                runDB $
+                  DB.insert_
+                    ( Email
+                        { emailMailbox = T.pack mailboxName,
+                          emailContents = message
+                        }
+                    )

@@ -12,6 +12,8 @@ library
   exposed-modules:
       Kalm
       Kalm.DB
+      Kalm.DB.Mailbox
+      Kalm.DB.Message
       Kalm.Env
       Kalm.OptParse
       Kalm.Sync
@@ -26,6 +28,7 @@ library
     , attoparsec
     , base >=4.7 && <5
     , bytestring
+    , case-insensitive
     , envparse
     , lens
     , monad-logger
