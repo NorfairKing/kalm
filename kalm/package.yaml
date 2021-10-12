@@ -49,6 +49,8 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    - HaskellNet
+    - HaskellNet-SSL
     - bytestring
     - kalm
     - monad-logger

@@ -15,6 +15,7 @@ library
       Kalm.Env
       Kalm.OptParse
       Kalm.Sync
+      Kalm.Sync.IMAP
   other-modules:
       Paths_kalm
   hs-source-dirs:
@@ -67,7 +68,9 @@ test-suite kalm-test
   build-tool-depends:
       sydtest-discover:sydtest-discover
   build-depends:
-      base >=4.7 && <5
+      HaskellNet
+    , HaskellNet-SSL
+    , base >=4.7 && <5
     , bytestring
     , kalm
     , monad-logger
