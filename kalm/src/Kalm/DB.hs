@@ -14,6 +14,9 @@ module Kalm.DB where
 import Data.ByteString (ByteString)
 import Data.Text (Text)
 import qualified Data.Text as T
+import Data.Validity
+import Data.Validity.ByteString ()
+import Data.Validity.Text ()
 import Data.Word
 import Database.Persist
 import Database.Persist.Sql
@@ -26,7 +29,7 @@ share
   [persistLowerCase|
 
 Email
-  mailboxName String
+  mailbox Text
   contents ByteString
 
   deriving Show
@@ -34,3 +37,5 @@ Email
   deriving Generic
 
 |]
+
+instance Validity Email

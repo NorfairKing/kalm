@@ -25,6 +25,9 @@ library:
     - purebred-email
     - text
     - unliftio
+    - validity
+    - validity-bytestring
+    - validity-text
     - yaml
     - yamlparse-applicative
 
@@ -52,11 +55,16 @@ tests:
     - HaskellNet
     - HaskellNet-SSL
     - bytestring
+    - genvalidity
+    - genvalidity-bytestring
+    - genvalidity-sydtest
+    - genvalidity-text
     - kalm
     - monad-logger
     - network
     - path
     - path-io
+    - persistent
     - port-utils
     - process
     - sydtest

@@ -62,4 +62,10 @@ kalmSync SyncSettings {..} =
             size <- liftIO $ IMAP.fetchSize imapConnection uid
             liftIO $ print size
             contents <- liftIO $ IMAP.fetch imapConnection uid
-            runDB $ DB.insert_ (Email {emailMailboxName = mailboxName, emailContents = contents})
+            runDB $
+              DB.insert_
+                ( Email
+                    { emailMailbox = T.pack mailboxName,
+                      emailContents = contents
+                    }
+                )

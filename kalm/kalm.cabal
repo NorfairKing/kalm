@@ -40,6 +40,9 @@ library
     , purebred-email
     , text
     , unliftio
+    , validity
+    , validity-bytestring
+    , validity-text
     , yaml
     , yamlparse-applicative
   default-language: Haskell2010
@@ -72,11 +75,16 @@ test-suite kalm-test
     , HaskellNet-SSL
     , base >=4.7 && <5
     , bytestring
+    , genvalidity
+    , genvalidity-bytestring
+    , genvalidity-sydtest
+    , genvalidity-text
     , kalm
     , monad-logger
     , network
     , path
     , path-io
+    , persistent
     , port-utils
     , process
     , sydtest
