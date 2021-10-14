@@ -66,6 +66,9 @@ test-suite kalm-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Kalm.DB.Gen
+      Kalm.DB.TestUtils
+      Kalm.DBSpec
       Kalm.SyncSpec
       Paths_kalm
   hs-source-dirs:
@@ -83,6 +86,7 @@ test-suite kalm-test
     , genvalidity
     , genvalidity-bytestring
     , genvalidity-sydtest
+    , genvalidity-sydtest-persistent
     , genvalidity-text
     , kalm
     , monad-logger

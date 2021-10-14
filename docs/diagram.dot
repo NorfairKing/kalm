@@ -8,9 +8,19 @@ digraph world {
 
     storage [label="email storage"];
     queue [label="Send queue"];
+    user [label="User"];
 
     storage -> storage [label="Read, Organise"];
     storage -> queue [label="Reply"];
+
+    {
+      rank=same;
+      rankdir=LR;
+      rank [style=invis];
+      rank -> queue -> user[style=invis];
+    }
+
+    user -> queue [label="Compose"];
 
   }
   imap_server -> storage  [label="Periodic Synchronisation", dir=both];

@@ -61,6 +61,7 @@ tests:
     - genvalidity
     - genvalidity-bytestring
     - genvalidity-sydtest
+    - genvalidity-sydtest-persistent
     - genvalidity-text
     - kalm
     - monad-logger
