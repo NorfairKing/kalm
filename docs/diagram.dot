@@ -8,7 +8,7 @@ digraph world {
 
     storage [label="email storage"];
     queue [label="Send queue"];
-    user [label="User"];
+    user [label="User", style=invis];
 
     storage -> storage [label="Read, Organise"];
     storage -> queue [label="Reply"];
